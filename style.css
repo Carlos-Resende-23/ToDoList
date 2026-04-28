@@ -1,0 +1,43 @@
+.done {
+  text-decoration: line-through !important;
+  opacity: 0.6;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  background-image: url(./assetz/fundoToDoList.png);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+h1 {
+  color: black;
+  margin-bottom: 20px;
+}
+
+#task-list {
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+}
+#task-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}

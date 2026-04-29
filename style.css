@@ -1,6 +1,7 @@
 .done {
   text-decoration: line-through !important;
   opacity: 0.6;
+  transition: 0.2s;
 }
 
 body {
@@ -8,21 +9,41 @@ body {
   font-size: 20px;
   background-image: url(./assetz/fundoToDoList.png);
   background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 0;
 }
 
 .container {
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
+  padding: 30px;
+  gap: 10px;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 400px;
   display: flex;
   flex-direction: column;
   text-align: center;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(6px);
+}
+
+.input-container button {
+  padding: 10px;
+  width: 100%;
+  margin-top: 5px;
 }
 
 h1 {
@@ -30,14 +51,58 @@ h1 {
   margin-bottom: 20px;
 }
 
-#task-list {
-  gap: 5px;
+#task-list li {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: 0.2s;
 }
+
+#task-list li span {
+  text-align: left;
+  flex: 1;
+}
+
 #task-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
   margin-bottom: 10px;
+  outline: none;
+  box-shadow: 0 0 0 2px #e0e0e0;
+}
+
+#task-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+#task-list li:hover {
+  transform: scale(1.02);
+}
+
+#task-list button {
+  background-color: #dc3545;
+}
+
+#task-list button:hover {
+  background-color: #bb2d3b;
+}
+
+button {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover {
+  background-color: #218838;
 }

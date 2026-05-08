@@ -2,70 +2,61 @@ const input = document.getElementById("task-input")
 const addbutton = document.getElementById("add-button")
 const taskList = document.getElementById("task-list")
 
-// CRIA UMA TAREFA (função principal)
-function createTask(taskText, isDone = false) {
-  const li = document.createElement("li")
+let tarefas = []
 
-  const span = document.createElement("span")
-  span.innerText = taskText
+function mostrarTarefas() {
+  taskList.innerHTML = ""
 
-  if (isDone) {
-    span.classList.add("done")
-  }
+  tarefas.forEach((tarefa, index) => {
+    const li = document.createElement("li")
 
-  span.addEventListener("click", function () {
-    span.classList.toggle("done")
-    saveTasks()
-  })
+    li.innerHTML = `
+      <span class="${tarefa.concluida ? "done" : ""}">
+        ${tarefa.texto}
+      </span>
+      <button>delete</button>
+    `
 
-  const deleteButton = document.createElement("button")
-  deleteButton.innerText = "Delete"
-
-  deleteButton.addEventListener("click", function (event) {
-    event.stopPropagation()
-    li.remove()
-    saveTasks()
-  })
-
-  li.appendChild(span)
-  li.appendChild(deleteButton)
-  taskList.appendChild(li)
-}
-
-// SALVA NO LOCALSTORAGE
-function saveTasks() {
-  const tasks = []
-
-  document.querySelectorAll("#task-list li span").forEach(function (span) {
-    tasks.push({
-      text: span.innerText,
-      done: span.classList.contains("done"),
+    li.querySelector("span").addEventListener("click", () => {
+      concluirTarefa(index)
     })
-  })
 
-  localStorage.setItem("tasks", JSON.stringify(tasks))
-}
+    li.querySelector("button").addEventListener("click", () => {
+      deletarTarefa(index)
+    })
 
-// CARREGA QUANDO ABRE A PÁGINA
-function loadTasks() {
-  const saved = localStorage.getItem("tasks")
-  if (!saved) return
-
-  const tasks = JSON.parse(saved)
-
-  tasks.forEach(function (task) {
-    createTask(task.text, task.done)
+    taskList.appendChild(li)
   })
 }
 
-// BOTÃO ADICIONAR
 addbutton.addEventListener("click", function () {
   if (input.value.trim() === "") return
 
-  createTask(input.value)
-  saveTasks()
+  tarefas.push({
+    texto: input.value,
+    concluida: false,
+  })
+
+  salvarNoStorage()
+  mostrarTarefas()
   input.value = ""
 })
 
-// INICIA A LISTA AO ABRIR
-loadTasks()
+function concluirTarefa(index) {
+  tarefas[index].concluida = !tarefas[index].concluida
+  salvarNoStorage()
+  mostrarTarefas()
+}
+
+function deletarTarefa(index) {
+  tarefas.splice(index, 1)
+  salvarNoStorage()
+  mostrarTarefas()
+}
+
+function salvarNoStorage() {
+  localStorage.setItem("tarefas", JSON.stringify(tarefas))
+}
+
+tarefas = JSON.parse(localStorage.getItem("tarefas")) || []
+mostrarTarefas()

@@ -21,6 +21,10 @@ function mostrarTarefas() {
       concluirTarefa(index)
     })
 
+    li.querySelector("span").addEventListener("dblclick", () => {
+      editarTarefa(index)
+    })
+
     li.querySelector("button").addEventListener("click", () => {
       deletarTarefa(index)
     })
@@ -50,6 +54,16 @@ function concluirTarefa(index) {
 
 function deletarTarefa(index) {
   tarefas.splice(index, 1)
+  salvarNoStorage()
+  mostrarTarefas()
+}
+
+function editarTarefa(index) {
+  const novoTexto = prompt("Editar tarefa:", tarefas[index].texto)
+
+  if (novoTexto === null || novoTexto.trim() === "") return
+
+  tarefas[index].texto = novoTexto
   salvarNoStorage()
   mostrarTarefas()
 }

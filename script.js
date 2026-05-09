@@ -1,6 +1,7 @@
 const input = document.getElementById("task-input")
 const addbutton = document.getElementById("add-button")
 const taskList = document.getElementById("task-list")
+const clearButton = document.getElementById("clear-done")
 
 let tarefas = []
 
@@ -46,6 +47,8 @@ addbutton.addEventListener("click", function () {
   input.value = ""
 })
 
+clearButton.addEventListener("click", limparConcluidas)
+
 function concluirTarefa(index) {
   tarefas[index].concluida = !tarefas[index].concluida
   salvarNoStorage()
@@ -64,6 +67,12 @@ function editarTarefa(index) {
   if (novoTexto === null || novoTexto.trim() === "") return
 
   tarefas[index].texto = novoTexto
+  salvarNoStorage()
+  mostrarTarefas()
+}
+
+function limparConcluidas() {
+  tarefas = tarefas.filter((tarefa) => !tarefa.concluida)
   salvarNoStorage()
   mostrarTarefas()
 }

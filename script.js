@@ -1,68 +1,100 @@
-// PEGANDO ELEMENTOS DO HTML
+// =======================
+// ELEMENTOS DO HTML
+// =======================
+
 const input = document.getElementById("task-input")
 const addButton = document.getElementById("add-button")
 const taskList = document.getElementById("task-list")
 const clearButton = document.getElementById("clear-done")
 
-// ARRAY PRINCIPAL ONDE AS TAREFAS FICAM NA MEMÓRIA
-let tarefas = []
+const filtroTodas = document.getElementById("filtro-todas")
+const filtroPendentes = document.getElementById("filtro-pendentes")
+const filtroConcluidas = document.getElementById("filtro-concluidas")
 
-// FUNÇÃO QUE DESENHA AS TAREFAS NA TELA
+// =======================
+// DADOS
+// =======================
+
+let tarefas = []
+let filtroAtual = "todas"
+
+// =======================
+// MOSTRAR TAREFAS
+// =======================
+
 function mostrarTarefas() {
-  // Limpa a lista antes de redesenhar
   taskList.innerHTML = ""
 
-  // Para cada tarefa do array
-  tarefas.forEach((tarefa, index) => {
-    // Cria a linha da tarefa
+  let tarefasFiltradas = tarefas
+
+  // Filtra conforme o botão clicado
+  if (filtroAtual === "pendentes") {
+    tarefasFiltradas = tarefas.filter((tarefa) => !tarefa.concluida)
+  }
+
+  if (filtroAtual === "concluidas") {
+    tarefasFiltradas = tarefas.filter((tarefa) => tarefa.concluida)
+  }
+
+  tarefasFiltradas.forEach((tarefa) => {
     const li = document.createElement("li")
 
-    // Cria o texto da tarefa
     const span = document.createElement("span")
     span.textContent = tarefa.texto
 
-    // Se estiver concluída, adiciona a classe
+    // Adiciona estilo de concluída
     if (tarefa.concluida) {
       span.classList.add("done")
     }
 
-    // Clique simples marca/desmarca como concluída
-    span.addEventListener("click", () => concluirTarefa(index))
+    // Marcar como concluída
+    span.addEventListener("click", () => {
+      tarefa.concluida = !tarefa.concluida
+      salvarNoStorage()
+      mostrarTarefas()
+    })
 
-    // Duplo clique permite editar
-    span.addEventListener("dblclick", () => editarTarefa(index))
+    // Editar tarefa
+    span.addEventListener("dblclick", () => {
+      editarTarefa(tarefa)
+    })
 
-    // DIV para organizar os botões
+    // Container dos botões
     const divBotoes = document.createElement("div")
 
-    // BOTÃO EDITAR
+    // Botão editar
     const btnEditar = document.createElement("button")
     btnEditar.textContent = "Editar"
-    btnEditar.addEventListener("click", () => editarTarefa(index))
 
-    // BOTÃO DELETAR
+    btnEditar.addEventListener("click", () => {
+      editarTarefa(tarefa)
+    })
+
+    // Botão deletar
     const btnDelete = document.createElement("button")
     btnDelete.textContent = "Delete"
-    btnDelete.addEventListener("click", () => deletarTarefa(index))
 
-    // Coloca os botões dentro da div
+    btnDelete.addEventListener("click", () => {
+      deletarTarefa(tarefa)
+    })
+
     divBotoes.appendChild(btnEditar)
     divBotoes.appendChild(btnDelete)
 
-    // Coloca tudo dentro da li
     li.appendChild(span)
     li.appendChild(divBotoes)
 
-    // Coloca a li dentro da lista
     taskList.appendChild(li)
   })
 }
 
-// BOTÃO ADICIONAR TAREFA
+// =======================
+// ADICIONAR TAREFA
+// =======================
+
 addButton.addEventListener("click", () => {
   if (input.value.trim() === "") return
 
-  // Adiciona no array
   tarefas.push({
     texto: input.value,
     concluida: false,
@@ -71,49 +103,79 @@ addButton.addEventListener("click", () => {
   salvarNoStorage()
   mostrarTarefas()
 
-  // Limpa o input
   input.value = ""
 })
 
-// MARCAR COMO CONCLUÍDA
-function concluirTarefa(index) {
-  tarefas[index].concluida = !tarefas[index].concluida
+// =======================
+// EDITAR
+// =======================
+
+function editarTarefa(tarefa) {
+  const novoTexto = prompt("Editar tarefa:", tarefa.texto)
+
+  if (novoTexto === null || novoTexto.trim() === "") {
+    return
+  }
+
+  tarefa.texto = novoTexto
+
   salvarNoStorage()
   mostrarTarefas()
 }
 
-// DELETAR TAREFA
-function deletarTarefa(index) {
-  tarefas.splice(index, 1)
+// =======================
+// DELETAR
+// =======================
+
+function deletarTarefa(tarefa) {
+  tarefas = tarefas.filter((t) => t !== tarefa)
+
   salvarNoStorage()
   mostrarTarefas()
 }
 
-// EDITAR TAREFA
-function editarTarefa(index) {
-  const novoTexto = prompt("Editar tarefa:", tarefas[index].texto)
+// =======================
+// LIMPAR CONCLUÍDAS
+// =======================
 
-  if (novoTexto === null || novoTexto.trim() === "") return
-
-  tarefas[index].texto = novoTexto
-  salvarNoStorage()
-  mostrarTarefas()
-}
-
-// LIMPAR TODAS AS CONCLUÍDAS
-clearButton.addEventListener("click", limparConcluidas)
-
-function limparConcluidas() {
+clearButton.addEventListener("click", () => {
   tarefas = tarefas.filter((tarefa) => !tarefa.concluida)
+
   salvarNoStorage()
   mostrarTarefas()
-}
+})
 
-// SALVAR NO LOCALSTORAGE
+// =======================
+// FILTROS
+// =======================
+
+filtroTodas.addEventListener("click", () => {
+  filtroAtual = "todas"
+  mostrarTarefas()
+})
+
+filtroPendentes.addEventListener("click", () => {
+  filtroAtual = "pendentes"
+  mostrarTarefas()
+})
+
+filtroConcluidas.addEventListener("click", () => {
+  filtroAtual = "concluidas"
+  mostrarTarefas()
+})
+
+// =======================
+// LOCAL STORAGE
+// =======================
+
 function salvarNoStorage() {
   localStorage.setItem("tarefas", JSON.stringify(tarefas))
 }
 
-// QUANDO ABRIR A PÁGINA, CARREGA O QUE JÁ EXISTE
+// =======================
+// INICIALIZAÇÃO
+// =======================
+
 tarefas = JSON.parse(localStorage.getItem("tarefas")) || []
+
 mostrarTarefas()

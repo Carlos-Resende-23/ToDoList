@@ -116,3 +116,23 @@ footer {
   z-index: 1;
   color: #fff;
 }
+
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    width: auto;
+    display: flex;
+    position: absolute;
+  }
+  .input-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer {
+    margin-top: auto;
+  }
+}

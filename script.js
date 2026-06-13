@@ -6,7 +6,7 @@ const input = document.getElementById("task-input")
 const addButton = document.getElementById("add-button")
 const taskList = document.getElementById("task-list")
 const clearButton = document.getElementById("clear-done")
-
+const contador = document.getElementById("contador")
 const filtroTodas = document.getElementById("filtro-todas")
 const filtroPendentes = document.getElementById("filtro-pendentes")
 const filtroConcluidas = document.getElementById("filtro-concluidas")
@@ -24,6 +24,14 @@ let filtroAtual = "todas"
 
 function mostrarTarefas() {
   taskList.innerHTML = ""
+
+  const total = tarefas.length
+
+  const pendentes = tarefas.filter((tarefa) => !tarefa.concluida).length
+
+  const concluidas = tarefas.filter((tarefa) => tarefa.concluida).length
+
+  contador.textContent = `Total: ${total} | Pendentes: ${pendentes} | Concluídas: ${concluidas}`
 
   let tarefasFiltradas = tarefas
 

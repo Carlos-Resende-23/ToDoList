@@ -96,6 +96,24 @@ function mostrarTarefas() {
   })
 }
 
+function atualizarFiltroAtivo() {
+  filtroTodas.classList.remove("filtro-ativo")
+  filtroPendentes.classList.remove("filtro-ativo")
+  filtroConcluidas.classList.remove("filtro-ativo")
+
+  if (filtroAtual === "todas") {
+    filtroTodas.classList.add("filtro-ativo")
+  }
+
+  if (filtroAtual === "pendentes") {
+    filtroPendentes.classList.add("filtro-ativo")
+  }
+
+  if (filtroAtual === "concluidas") {
+    filtroConcluidas.classList.add("filtro-ativo")
+  }
+}
+
 // =======================
 // ADICIONAR TAREFA
 // =======================
@@ -159,16 +177,19 @@ clearButton.addEventListener("click", () => {
 
 filtroTodas.addEventListener("click", () => {
   filtroAtual = "todas"
+  atualizarFiltroAtivo()
   mostrarTarefas()
 })
 
 filtroPendentes.addEventListener("click", () => {
   filtroAtual = "pendentes"
+  atualizarFiltroAtivo()
   mostrarTarefas()
 })
 
 filtroConcluidas.addEventListener("click", () => {
   filtroAtual = "concluidas"
+  atualizarFiltroAtivo()
   mostrarTarefas()
 })
 
@@ -186,4 +207,5 @@ function salvarNoStorage() {
 
 tarefas = JSON.parse(localStorage.getItem("tarefas")) || []
 
+atualizarFiltroAtivo()
 mostrarTarefas()

@@ -41,9 +41,20 @@ body::before {
   backdrop-filter: blur(6px);
 }
 
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.input-container input,
+.input-container button {
+  width: 100%;
+}
+
 .input-container button {
   padding: 10px;
-  width: 100%;
   margin-top: 5px;
 }
 
@@ -84,6 +95,15 @@ h1 {
 }
 
 #task-input {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  outline: none;
+  box-shadow: 0 0 0 2px #e0e0e0;
+}
+
+#buscar {
   padding: 12px;
   border: none;
   border-radius: 8px;

@@ -10,6 +10,7 @@ const contador = document.getElementById("contador")
 const filtroTodas = document.getElementById("filtro-todas")
 const filtroPendentes = document.getElementById("filtro-pendentes")
 const filtroConcluidas = document.getElementById("filtro-concluidas")
+const buscarInput = document.getElementById("buscar")
 
 // =======================
 // DADOS
@@ -35,13 +36,21 @@ function mostrarTarefas() {
 
   let tarefasFiltradas = tarefas
 
+  const busca = buscarInput.value.toLowerCase()
+
+  if (busca !== "") {
+    tarefasFiltradas = tarefasFiltradas.filter((tarefa) =>
+      tarefa.texto.toLowerCase().includes(busca),
+    )
+  }
+
   // Filtra conforme o botão clicado
   if (filtroAtual === "pendentes") {
-    tarefasFiltradas = tarefas.filter((tarefa) => !tarefa.concluida)
+    tarefasFiltradas = tarefasFiltradas.filter((tarefa) => !tarefa.concluida)
   }
 
   if (filtroAtual === "concluidas") {
-    tarefasFiltradas = tarefas.filter((tarefa) => tarefa.concluida)
+    tarefasFiltradas = tarefasFiltradas.filter((tarefa) => tarefa.concluida)
   }
 
   tarefasFiltradas.forEach((tarefa) => {
@@ -190,6 +199,10 @@ filtroPendentes.addEventListener("click", () => {
 filtroConcluidas.addEventListener("click", () => {
   filtroAtual = "concluidas"
   atualizarFiltroAtivo()
+  mostrarTarefas()
+})
+
+buscarInput.addEventListener("input", () => {
   mostrarTarefas()
 })
 

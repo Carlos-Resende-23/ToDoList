@@ -11,6 +11,7 @@ const filtroTodas = document.getElementById("filtro-todas")
 const filtroPendentes = document.getElementById("filtro-pendentes")
 const filtroConcluidas = document.getElementById("filtro-concluidas")
 const buscarInput = document.getElementById("buscar")
+const prioridades = document.getElementById("prioridades")
 
 // =======================
 // DADOS
@@ -53,11 +54,17 @@ function mostrarTarefas() {
     tarefasFiltradas = tarefasFiltradas.filter((tarefa) => tarefa.concluida)
   }
 
+  const emojiPrioridades = {
+    alta: "🔴",
+    media: "🟡",
+    baixa: "🟢",
+  }
+
   tarefasFiltradas.forEach((tarefa) => {
     const li = document.createElement("li")
 
     const span = document.createElement("span")
-    span.textContent = tarefa.texto
+    span.textContent = `${emojiPrioridades[tarefa.prioridades]} ${tarefa.texto} (${tarefa.prioridades})`
 
     // Adiciona estilo de concluída
     if (tarefa.concluida) {
@@ -132,6 +139,7 @@ addButton.addEventListener("click", () => {
 
   tarefas.push({
     texto: input.value,
+    prioridades: prioridades.value,
     concluida: false,
   })
 

@@ -70,6 +70,17 @@ h1 {
   text-align: center;
 }
 
+p {
+  font-weight: bold;
+  margin: 0;
+}
+
+#prioridades {
+  height: 25px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
 .filtro-ativo {
   background-color: #4caf50;
   color: white;

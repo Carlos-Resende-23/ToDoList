@@ -60,6 +60,16 @@ function mostrarTarefas() {
     baixa: "🟢",
   }
 
+  const peso = {
+    alta: 3,
+    media: 2,
+    baixa: 1,
+  }
+
+  tarefasFiltradas.sort((a, b) => {
+    return peso[b.prioridades] - peso[a.prioridades]
+  })
+
   tarefasFiltradas.forEach((tarefa) => {
     const li = document.createElement("li")
 

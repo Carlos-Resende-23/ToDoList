@@ -79,6 +79,7 @@ p {
   height: 25px;
   border-radius: 10px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .filtro-ativo {

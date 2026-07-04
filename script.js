@@ -73,8 +73,16 @@ function mostrarTarefas() {
   tarefasFiltradas.forEach((tarefa) => {
     const li = document.createElement("li")
 
+    const data = new Date(tarefa.data)
+
+    const dataFormatada = data.toLocaleDateString("pt-BR")
+    const horaFormatada = data.toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+
     const span = document.createElement("span")
-    span.textContent = `${emojiPrioridades[tarefa.prioridades]} ${tarefa.texto} (${tarefa.prioridades})`
+    span.textContent = `${emojiPrioridades[tarefa.prioridades]} ${tarefa.texto} - ${dataFormatada} ${horaFormatada} (${tarefa.prioridades})`
 
     // Adiciona estilo de concluída
     if (tarefa.concluida) {
@@ -151,6 +159,7 @@ addButton.addEventListener("click", () => {
     texto: input.value,
     prioridades: prioridades.value,
     concluida: false,
+    data: new Date(),
   })
 
   salvarNoStorage()

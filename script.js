@@ -82,7 +82,10 @@ function mostrarTarefas() {
     })
 
     const span = document.createElement("span")
-    span.textContent = `${emojiPrioridades[tarefa.prioridades]} ${tarefa.texto} - ${dataFormatada} ${horaFormatada} (${tarefa.prioridades})`
+    span.textContent = `${tarefa.texto}`
+
+    const small = document.createElement("small")
+    small.textContent = `${dataFormatada} • ${horaFormatada} • ${emojiPrioridades[tarefa.prioridades]} (${tarefa.prioridades})`
 
     // Adiciona estilo de concluída
     if (tarefa.concluida) {
@@ -124,6 +127,7 @@ function mostrarTarefas() {
     divBotoes.appendChild(btnDelete)
 
     li.appendChild(span)
+    li.appendChild(small)
     li.appendChild(divBotoes)
 
     taskList.appendChild(li)

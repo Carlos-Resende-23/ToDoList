@@ -75,6 +75,19 @@ p {
   margin: 0;
 }
 
+li span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+li small {
+  display: block;
+  margin-top: 5px;
+  padding: 5px;
+  color: #555;
+  font-size: 13px;
+}
+
 #prioridades {
   height: 25px;
   border-radius: 10px;
@@ -92,13 +105,12 @@ p {
 
 #task-list li {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 8px 10px;
+  padding: 12px;
   background: white;
   border-radius: 8px;
   margin-bottom: 8px;
-  transition: 0.2s;
 }
 
 #task-list li span {
@@ -143,7 +155,8 @@ p {
 }
 
 button {
-  padding: 5px;
+  padding: 10px;
+  margin-right: 5px;
   border: none;
   border-radius: 5px;
   background-color: #28a745;

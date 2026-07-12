@@ -95,6 +95,18 @@ li small {
   cursor: pointer;
 }
 
+.prioridade-alta {
+  border-left: 5px solid red;
+}
+
+.prioridade-media {
+  border-left: 5px solid yellow;
+}
+
+.prioridade-baixa {
+  border-left: 5px solid green;
+}
+
 .filtro-ativo {
   background-color: #4caf50;
   color: white;

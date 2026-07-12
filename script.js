@@ -72,6 +72,7 @@ function mostrarTarefas() {
 
   tarefasFiltradas.forEach((tarefa) => {
     const li = document.createElement("li")
+    li.classList.add(`prioridade-${tarefa.prioridades}`)
 
     const data = new Date(tarefa.data)
 

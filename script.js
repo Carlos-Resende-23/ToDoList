@@ -12,6 +12,7 @@ const filtroPendentes = document.getElementById("filtro-pendentes")
 const filtroConcluidas = document.getElementById("filtro-concluidas")
 const buscarInput = document.getElementById("buscar")
 const prioridades = document.getElementById("prioridades")
+const vencimento = document.getElementById("vencimento")
 
 // =======================
 // DADOS
@@ -82,11 +83,14 @@ function mostrarTarefas() {
       minute: "2-digit",
     })
 
+    const dataVencimento = new Date(tarefa.vencimento)
+    const vencimentoFormatado = dataVencimento.toLocaleDateString("pt-BR")
+
     const span = document.createElement("span")
     span.textContent = `${tarefa.texto}`
 
     const small = document.createElement("small")
-    small.textContent = `${dataFormatada} • ${horaFormatada} • ${emojiPrioridades[tarefa.prioridades]} (${tarefa.prioridades})`
+    small.textContent = `${dataFormatada} • ${horaFormatada} • ${vencimentoFormatado} • ${emojiPrioridades[tarefa.prioridades]} (${tarefa.prioridades})`
 
     // Adiciona estilo de concluída
     if (tarefa.concluida) {
@@ -163,9 +167,12 @@ addButton.addEventListener("click", () => {
   tarefas.push({
     texto: input.value,
     prioridades: prioridades.value,
+    vencimento: vencimento.value,
     concluida: false,
     data: new Date(),
   })
+
+  console.log(tarefas)
 
   salvarNoStorage()
   mostrarTarefas()

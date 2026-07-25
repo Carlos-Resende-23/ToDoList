@@ -89,12 +89,17 @@ li span {
   font-weight: bold;
 }
 
-li small {
+li smallCriacao,
+li smallVencimento {
   display: block;
   margin-top: 5px;
   padding: 5px;
   color: #555;
   font-size: 13px;
+}
+
+small strong {
+  color: #333;
 }
 
 #prioridades {

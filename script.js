@@ -89,8 +89,11 @@ function mostrarTarefas() {
     const span = document.createElement("span")
     span.textContent = `${tarefa.texto}`
 
-    const small = document.createElement("small")
-    small.textContent = `${dataFormatada} • ${horaFormatada} • ${vencimentoFormatado} • ${emojiPrioridades[tarefa.prioridades]} (${tarefa.prioridades})`
+    const smallCriacao = document.createElement("small")
+    smallCriacao.textContent = ` 📅 Criada: ${dataFormatada} • ${horaFormatada}`
+
+    const smallVencimento = document.createElement("small")
+    smallVencimento.textContent = ` ⏳ Vence: ${vencimentoFormatado} • ${emojiPrioridades[tarefa.prioridades]} ${tarefa.prioridades}`
 
     // Adiciona estilo de concluída
     if (tarefa.concluida) {
@@ -132,7 +135,8 @@ function mostrarTarefas() {
     divBotoes.appendChild(btnDelete)
 
     li.appendChild(span)
-    li.appendChild(small)
+    li.appendChild(smallCriacao)
+    li.appendChild(smallVencimento)
     li.appendChild(divBotoes)
 
     taskList.appendChild(li)

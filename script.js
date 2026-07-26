@@ -76,6 +76,7 @@ function mostrarTarefas() {
     li.classList.add(`prioridade-${tarefa.prioridades}`)
 
     const data = new Date(tarefa.data)
+    const hoje = new Date()
 
     const dataFormatada = data.toLocaleDateString("pt-BR")
     const horaFormatada = data.toLocaleTimeString("pt-BR", {
@@ -95,9 +96,13 @@ function mostrarTarefas() {
     const smallVencimento = document.createElement("small")
     smallVencimento.textContent = ` ⏳ Vence: ${vencimentoFormatado} • ${emojiPrioridades[tarefa.prioridades]} ${tarefa.prioridades}`
 
-    // Adiciona estilo de concluída
+    // Adiciona estilo de concluída ou atrasada
     if (tarefa.concluida) {
       span.classList.add("done")
+    }
+
+    if (hoje > dataVencimento && !tarefa.concluida) {
+      li.classList.add("atrasada")
     }
 
     // Marcar como concluída

@@ -103,6 +103,7 @@ function mostrarTarefas() {
 
     if (hoje > dataVencimento && !tarefa.concluida) {
       li.classList.add("atrasada")
+      smallVencimento.textContent += " ⚠️ ATRASADA"
     }
 
     // Marcar como concluída

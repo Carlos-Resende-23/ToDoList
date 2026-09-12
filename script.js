@@ -201,7 +201,27 @@ function editarTarefa(tarefa) {
     return
   }
 
-  tarefa.texto = novoTexto
+  const novaPrioridade = prompt(
+    "Editar prioridade (alta, media ou baixa):",
+    tarefa.prioridades,
+  )
+
+  if (novaPrioridade === null || novaPrioridade.trim() === "") {
+    return
+  }
+
+  const novoVencimento = prompt(
+    "Editar vencimento (AAAA-MM-DD):",
+    tarefa.vencimento,
+  )
+
+  if (novoVencimento === null || novoVencimento.trim() === "") {
+    return
+  }
+
+  tarefa.texto = novoTexto.trim()
+  tarefa.prioridades = novaPrioridade.trim()
+  tarefa.vencimento = novoVencimento
 
   salvarNoStorage()
   mostrarTarefas()

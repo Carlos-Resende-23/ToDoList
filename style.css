@@ -27,11 +27,12 @@ body::before {
 }
 
 .container {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.84);
   padding: 30px;
-  gap: 10px;
+  gap: 12px;
   border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -44,7 +45,7 @@ body::before {
 .input-container {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   align-items: center;
 }
 
@@ -145,8 +146,13 @@ small strong {
   align-items: center;
   padding: 12px;
   background: white;
-  border-radius: 8px;
-  margin-bottom: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 #task-list li span {
@@ -172,6 +178,11 @@ small strong {
   box-shadow: 0 0 0 2px #e0e0e0;
 }
 
+#task-input:focus,
+#buscar:focus {
+  box-shadow: 0 0 0 2px rgba(54, 137, 78, 0.55);
+}
+
 #task-list {
   list-style: none;
   padding: 0;
@@ -179,7 +190,8 @@ small strong {
 }
 
 #task-list li:hover {
-  transform: scale(1.02);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
 }
 
 #task-list button {
@@ -194,7 +206,7 @@ button {
   padding: 10px;
   margin-right: 5px;
   border: none;
-  border-radius: 5px;
+  border-radius: 7px;
   background-color: #28a745;
   color: white;
   cursor: pointer;
@@ -216,12 +228,15 @@ footer {
 @media (max-width: 600px) {
   body {
     font-size: 15px;
+    justify-content: flex-start;
+    padding: 16px 12px;
   }
 
   .container {
-    width: auto;
+    width: min(100%, 400px);
     display: flex;
-    position: absolute;
+    position: relative;
+    padding: 22px 18px;
   }
   .input-container {
     display: flex;
@@ -230,5 +245,6 @@ footer {
 
   footer {
     margin-top: auto;
+    font-size: 13px;
   }
 }

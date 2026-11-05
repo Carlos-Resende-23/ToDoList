@@ -54,18 +54,54 @@ body::before {
   width: 100%;
 }
 
+.input-container > input,
+.input-container > button {
+  box-sizing: border-box;
+}
+
 .input-container button {
   padding: 10px;
   margin-top: 5px;
 }
 
-#vencimento {
-  height: 30px;
-  width: 100px;
-  border: 2px solid black;
-  border-radius: 10px;
-  cursor: text;
-  font-style: bold;
+.task-options {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  width: 100%;
+}
+
+.task-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  align-items: stretch;
+  min-width: 0;
+  gap: 6px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.task-field select,
+.task-field input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: #222;
+  font: inherit;
+}
+
+.task-field select:focus,
+.task-field input:focus {
+  outline: none;
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.15);
 }
 
 .atrasada {
@@ -105,15 +141,6 @@ li smallVencimento {
 
 small strong {
   color: #333;
-}
-
-#prioridades {
-  height: 30px;
-  width: 100px;
-  border: 2px solid black;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 .prioridade-alta {

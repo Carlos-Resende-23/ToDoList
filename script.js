@@ -84,8 +84,16 @@ function mostrarTarefas() {
       minute: "2-digit",
     })
 
-    const dataVencimento = new Date(tarefa.vencimento)
-    const vencimentoFormatado = dataVencimento.toLocaleDateString("pt-BR")
+    const dataVencimento = tarefa.vencimento
+      ? new Date(`${tarefa.vencimento}T00:00:00`)
+      : null
+    const vencimentoValido =
+      dataVencimento && !Number.isNaN(dataVencimento.getTime())
+    const vencimentoFormatado = vencimentoValido
+      ? dataVencimento.toLocaleDateString("pt-BR")
+      : tarefa.vencimento
+        ? "Data inválida"
+        : "Sem prazo"
 
     const span = document.createElement("span")
     span.textContent = `${tarefa.texto}`
@@ -101,7 +109,8 @@ function mostrarTarefas() {
       span.classList.add("done")
     }
 
-    if (hoje > dataVencimento && !tarefa.concluida) {
+    hoje.setHours(0, 0, 0, 0)
+    if (vencimentoValido && hoje > dataVencimento && !tarefa.concluida) {
       li.classList.add("atrasada")
       smallVencimento.textContent += " ⚠️ ATRASADA"
     }

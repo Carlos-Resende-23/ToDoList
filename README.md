@@ -1,37 +1,42 @@
 # 📝 ToDo List
 
-Uma lista de tarefas feita com HTML, CSS e JavaScript puro.
+Uma aplicação simples de lista de tarefas feita com HTML, CSS e JavaScript puro. As tarefas ficam salvas no armazenamento local do navegador.
 
-## 🚀 Funcionalidades
+## ✨ Funcionalidades
 
-- Adicionar tarefas
-- Riscar tarefas concluídas
-- Deletar tarefas
-- Salvar tarefas no navegador (LocalStorage)
+- Adicionar tarefas com prioridade e data de vencimento opcional
+- Marcar tarefas como concluídas clicando no texto
+- Editar tarefas com duplo clique no texto ou pelo botão **Editar**
+- Excluir tarefas individualmente
+- Buscar tarefas pelo texto
+- Filtrar tarefas entre todas, pendentes e concluídas
+- Ordenar tarefas por prioridade
+- Identificar tarefas atrasadas
+- Limpar todas as tarefas concluídas
+- Preservar tarefas no navegador usando `localStorage`
 
-## 🛠 Tecnologias utilizadas
+## 🛠️ Tecnologias
 
 - HTML
 - CSS
 - JavaScript
 
-## 🎯 O que aprendi com este projeto
+O projeto não requer instalação de dependências nem servidor.
 
-Neste projeto eu pratiquei:
+## ▶️ Como executar
 
-- Manipulação do DOM
-- Eventos de clique
-- Criação dinâmica de elementos
-- Uso de classes CSS com JavaScript
-- Armazenamento de dados com LocalStorage
+1. Baixe ou clone este repositório.
+2. Abra o arquivo `index.html` em um navegador.
 
-## ▶️ Como executar o projeto
+## 💡 Como usar
 
-Basta abrir o arquivo `index.html` no navegador.
+1. Digite a tarefa no campo **Adicionar uma tarefa**.
+2. Escolha uma prioridade e, se desejar, informe o vencimento.
+3. Clique em **Adicionar**.
+4. Use os filtros e a busca para encontrar tarefas. Clique no texto para alternar entre pendente e concluída.
+5. Use **Editar** ou dê duplo clique no texto para alterar uma tarefa.
 
-## 📷 Preview
-
-(Em breve)
+Os dados são salvos somente no navegador e no dispositivo em que foram criados. Limpar os dados do navegador pode removê-los.
 
 ---
 
